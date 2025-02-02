@@ -1,8 +1,6 @@
 
 
 export const loginUser = async (body: {name:string, email:string}): Promise<void> => {
-
-    console.log("backendBaseUrl rr", process.env.BACKEND_ADDRESS);
     
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ADDRESS}/auth/login`, {
         method: 'POST',
