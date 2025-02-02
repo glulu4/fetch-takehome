@@ -1,3 +1,9 @@
+export interface LoginBody {
+    name: string;
+    email: string;
+}
+
+
 export interface Dog {
     id: string;
     img: string;
@@ -48,3 +54,19 @@ export interface LocationSearchParams {
     size?: number;
     from?: number;
 }
+export interface LocationSearchResponse {
+    results: Location[],
+    total: number
+}
+
+
+
+export const states = [
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+];
+
+export const PAGE_SIZE = 10;

@@ -1,16 +1,26 @@
-import {API_BASE_URL} from '../config';
-import type {Dog, SearchDogsResponse, Match} from '@/types/api';
+
+
+import {Dog, Match, SearchDogsResponse} from "@/types/types";
+
 
 export const getBreeds = async (): Promise<string[]> => {
-    const response = await fetch(`${API_BASE_URL}/dogs/breeds`, {
-        credentials: 'include',
-    });
+    try {
+        console.log("fetching breeds");
+        console.log(process.env.NEXT_PUBLIC_BACKEND_ADDRESS);
+        
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ADDRESS}/dogs/breeds`, {
+            credentials: 'include',
+        });
 
-    if (!response.ok) {
+        if (!response.ok) {
+            throw new Error('Failed to fetch breeds');
+        }
+
+        return response.json(); 
+    } catch (error) {
         throw new Error('Failed to fetch breeds');
     }
 
-    return response.json();
 };
 
 export const searchDogs = async (params: {
@@ -36,7 +46,7 @@ export const searchDogs = async (params: {
     if (params.from) queryParams.append('from', params.from);
     if (params.sort) queryParams.append('sort', params.sort);
 
-    const response = await fetch(`${API_BASE_URL}/dogs/search?${queryParams}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ADDRESS}/dogs/search?${queryParams}`, {
         credentials: 'include',
     });
 
@@ -48,7 +58,7 @@ export const searchDogs = async (params: {
 };
 
 export const getDogs = async (dogIds: string[]): Promise<Dog[]> => {
-    const response = await fetch(`${API_BASE_URL}/dogs`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ADDRESS}/dogs`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -65,7 +75,7 @@ export const getDogs = async (dogIds: string[]): Promise<Dog[]> => {
 };
 
 export const matchDog = async (dogIds: string[]): Promise<Match> => {
-    const response = await fetch(`${API_BASE_URL}/dogs/match`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ADDRESS}/dogs/match`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

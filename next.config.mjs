@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "imagedelivery.net",
+        hostname: "frontend-take-home.fetch.com",
       },
     ],
   },

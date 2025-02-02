@@ -6,6 +6,8 @@ const buildConfig = () => {
     process.env.NEXT_DEFAULT_METADATA_DEFAULT_TITLE || "Meta title";
   const defaultDescription = process.env.NEXT_PUBLIC_DESCRIPTION || "Description";
 
+  
+
   return {
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
     name: {
@@ -20,9 +22,6 @@ const buildConfig = () => {
         description: defaultDescription,
       },
     },
-    ogImageSecret:
-      process.env.OG_IMAGE_SECRET ||
-      "secret_used_for_signing_and_verifying_the_og_image_url",
 
   };
 };

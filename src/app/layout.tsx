@@ -1,14 +1,13 @@
 
 import { config } from "@/config";
-import { signOgImageUrl } from "@/lib/og-image";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {Header} from "@/components/Header";
-import {Footer} from "@/components/Footer";
 import Providers from "@/components/theme-provider";
-
+import {AuthProvider} from "@/context/AuthContext";
+import {Toaster} from 'react-hot-toast';
+import "@ant-design/compatible";
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
@@ -18,15 +17,7 @@ export const metadata: Metadata = {
     template: config.name.metadata.title.template,
   },
   description: config.name.metadata.description,
-  openGraph: {
-    title: config.name.metadata.title.default,
-    description: config.name.metadata.description,
-    images: [
-      signOgImageUrl({
-        title: config.name.name,
-      }),
-    ]
-  }
+
 };
 
 export default function RootLayout({
@@ -38,22 +29,25 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-6xl m-auto",
+          "min-h-screen bg-background font-sans antialiased m-auto",
           fontSans.variable
         )}
       >
-        <Providers
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <main>
-            <Header />
-            {children}
-            <Footer />
+        <AuthProvider>
+          <Providers
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main>
+              <Toaster />
+              {children}
             </main>
-        </Providers>
+          </Providers>
+        </AuthProvider>
+
+
       </body>
     </html>
   );
