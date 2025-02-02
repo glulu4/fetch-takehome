@@ -15,6 +15,28 @@ export type LocationSearchParams = {
     state?: string;
 };
 
+/**
+ * Custom hook to manage dog-related data and operations.
+ *
+ * @returns {Object} An object containing the following properties and functions:
+ * - `dogs`: An array of `Dog` objects representing the fetched dogs.
+ * - `breeds`: An array of strings representing the available dog breeds.
+ * - `favorites`: An array of `Dog` objects representing the user's favorite dogs.
+ * - `match`: A `Dog` object representing the matched dog, or `null` if no match is found.
+ * - `loading`: A boolean indicating whether the dog data is currently being fetched.
+ * - `locations`: An array of `Location` objects representing the fetched locations.
+ * - `locationLoading`: A boolean indicating whether the location data is currently being fetched.
+ * - `selectedZipCodes`: An array of strings representing the selected zip codes for filtering dogs.
+ * - `locationSearch`: An object containing the search parameters for locations.
+ * - `fetchDogs`: A function to fetch dogs based on the provided filter options.
+ * - `fetchLocations`: A function to fetch locations based on the provided search parameters.
+ * - `addToFavorites`: A function to add a dog to the favorites list.
+ * - `findMatch`: A function to find a match from the favorites list.
+ * - `setLocationSearch`: A function to update the location search parameters.
+ * - `toggleZipCode`: A function to add or remove a zip code from the selected zip codes.
+ * - `removeFromFavorites`: A function to remove a dog from the favorites list.
+ * - `totalDogs`: A number representing the total count of fetched dogs.
+ */
 export const useDogs = () => {
     // Dogs & Favorites
     const [dogs, setDogs] = useState<Dog[]>([]);
